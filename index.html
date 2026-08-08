@@ -4,54 +4,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Enter any square matrix and instantly see its LDU factorization, step by step.">
+    <meta name="theme-color" content="#5643cc">
     <title>LDU Factorization Calculator</title>
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23455EB5'/%3E%3Cstop offset='1' stop-color='%23673FD7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3Cpath d='M9 8v16M23 8v16' stroke='white' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Oxanium:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tiny5&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 </head>
 
 <body>
-    <header>
-        <div class="box1">
-            <nav class="navbar">
-                <div class="logo">
-                    <!-- <img src="https://imgs.search.brave.com/dCqIIhH5XIiAvfeH8hugmVBqMExJD0k2tAA0r0p1YaU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9paDEu/cmVkYnViYmxlLm5l/dC9pbWFnZS41Mjgw/NzQ4MTEyLjc3ODgv/ZmxhdCw3NTB4LDA3/NSxmLXBhZCw3NTB4/MTAwMCxmOGY4Zjgu/dTIuanBn"
-                            width="80px"> -->
-                    <a href="">Group Project</a>
+    <a class="skip-link" href="#matrixform">Skip to calculator</a>
+
+    <header class="site-header">
+        <nav class="navbar" aria-label="Main">
+            <div class="logo">
+                <span class="logo-mark" aria-hidden="true">L<span>D</span>U</span>
+                <a href="#top">Group Project</a>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#main-header">Overview</a></li>
+                <li><a href="#matrixform">Calculator</a></li>
+                <li><a href="#result">Results</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch colour theme"
+                title="Switch colour theme">
+                <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4.2" />
+                    <path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9" />
+                </svg>
+                <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z" />
+                </svg>
+            </button>
+            <a class="nav-cta" href="#matrixform">Try it now</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"
+                aria-controls="nav-links">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+
+        <section class="hero" id="top">
+            <div class="hero-text">
+                <span class="eyebrow">Linear Algebra · Made Visual</span>
+                <h1>LDU Factorization Calculator</h1>
+                <p>Decompose any square matrix into a lower&nbsp;triangular, diagonal, and upper&nbsp;triangular
+                    matrix — with every elimination step shown along the way.</p>
+                <div class="hero-actions">
+                    <a href="#matrixform" class="btn btn-primary">Start calculating</a>
+                    <a href="#main-header" class="btn btn-ghost">How it works</a>
                 </div>
-                <ul>
-                    <li><a href="#main-header">LDU Calculator</a></li>
-                </ul>
-            </nav>
-            <section class="section1">
-                <div class="box2">
-                    <h2>Welcome to the LDU Factorization Calculator</h2>
-                    <p>Calculate and understand the LDU factorization of any matrix.</p>
-                    <button><a href="#main-header">Click to calculate</a></button>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="equation-card">
+                    <div class="eq-row">
+                        <span class="eq-letter eq-a">A</span>
+                        <span class="eq-eq">=</span>
+                        <span class="eq-letter eq-l">L</span>
+                        <span class="eq-eq eq-dot">·</span>
+                        <span class="eq-letter eq-d">D</span>
+                        <span class="eq-eq eq-dot">·</span>
+                        <span class="eq-letter eq-u">U</span>
+                    </div>
+                    <div class="eq-caption">Lower &middot; Diagonal &middot; Upper</div>
                 </div>
-            </section>
+            </div>
+        </section>
     </header>
 
     <main>
-        <div id="main-header">
-            <h2>Welcome to the LDU Factorization Calculator</h2>
-            <p>Calculate and understand the LDU factorization of any matrix.</p>
-        </div>
-        <div id="matrixform">
-            <input type="number" id="matrix-dimension" class="dimension-input" placeholder="Matrix dimension" min="1">
-            <button onclick="generateMatrixInputs()" id="gen-matrix">Generate Matrix</button>
-            <div id="matrix-container" class="matrix-container"></div>
-            <a href="#result"><button id="submit-matrix" class="submit-button" onclick="submitMatrix()" style="display: none;">Submit
-                Matrix</button></a>
-        </div>
+        <section id="main-header" class="intro">
+            <h2>How the factorization works</h2>
+            <p class="section-subtitle">Gaussian elimination breaks your matrix into three simpler pieces you can
+                read at a glance.</p>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <span class="step-num">1</span>
+                    <h3>Enter your matrix</h3>
+                    <p>Pick a dimension and fill in the values — the grid updates instantly to match.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">2</span>
+                    <h3>Eliminate below the pivot</h3>
+                    <p>Row operations clear every entry below the diagonal, one column at a time.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-num">3</span>
+                    <h3>Read off L, D, and U</h3>
+                    <p>The multipliers form <b>L</b>, the pivots form <b>D</b>, and the reduced rows form <b>U</b>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="matrixform" class="calculator">
+            <div class="calculator-card">
+                <h2>Build your matrix</h2>
+                <p class="section-subtitle">Choose a dimension from 1 to 8, generate the grid, then fill in the
+                    values.</p>
+
+                <div class="dimension-row">
+                    <label for="matrix-dimension">Dimension</label>
+                    <div class="stepper">
+                        <button type="button" id="dim-dec" aria-label="Decrease dimension">&minus;</button>
+                        <input type="number" id="matrix-dimension" class="dimension-input" placeholder="n" min="1"
+                            max="8" value="3" inputmode="numeric">
+                        <button type="button" id="dim-inc" aria-label="Increase dimension">&plus;</button>
+                    </div>
+                    <button id="gen-matrix" type="button">Generate Matrix</button>
+                </div>
+
+                <p class="form-hint" id="form-hint" role="status">Empty cells count as zero.</p>
+
+                <div id="matrix-container" class="matrix-container"></div>
+
+                <p class="form-tip">Tip: move with the <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> keys, paste a
+                    whole matrix from a spreadsheet, or press <kbd>Enter</kbd> to factorize.</p>
+
+                <div class="calculator-actions">
+                    <button id="submit-matrix" class="submit-button" type="button" hidden>Factorize Matrix</button>
+                    <button id="random-matrix" class="ghost-button" type="button" hidden>Randomize</button>
+                    <button id="fill-example" class="ghost-button" type="button" hidden>Fill example</button>
+                    <button id="clear-matrix" class="clear-button" type="button" hidden>Clear</button>
+                </div>
+            </div>
+        </section>
     </main>
+
     <section id="result">
         <h2>Result</h2>
-        <div id="ldu-steps"></div>
+        <p class="section-subtitle" id="result-subtitle" role="status">Fill in a matrix above and factorize it to see
+            the elimination steps here.</p>
+
+        <div class="result-summary" id="result-summary" hidden></div>
+
+        <div class="playback" id="playback" hidden>
+            <div class="playback-controls">
+                <button id="step-prev" type="button" aria-label="Previous step">&#8249;</button>
+                <button id="step-play" class="is-primary" type="button">Play</button>
+                <button id="step-next" type="button" aria-label="Next step">&#8250;</button>
+            </div>
+            <div class="playback-track">
+                <div class="progress" role="presentation"><span id="progress-fill"></span></div>
+                <span class="step-counter" id="step-counter">Step 1 of 1</span>
+            </div>
+            <div class="playback-extras">
+                <button id="step-all" class="ghost-button" type="button">Show all</button>
+                <button id="copy-result" class="ghost-button" type="button">Copy L·D·U</button>
+            </div>
+        </div>
+
+        <div id="steps-container"></div>
     </section>
+
+    <footer class="site-footer">
+        <p>Group Project &middot; LDU Factorization Calculator &middot; Built for learning linear algebra.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
